@@ -1,7 +1,13 @@
 <h2>Search NASA's API for images:</h2>
 <br>
 <label>Search Term:
-    <input [(ngModel)]="search" placeholder="e.g. 'Apollo 11'"/>
-    <button (click)="imageSearchService.getImages()">Search</button>
+    <input [(ngModel)]="searchTerm" placeholder="e.g. 'Apollo 11'" (keyup.enter)='getImages()'/>
+    <button (click)="getImages()">Search</button>
 </label>
+<br><br>
+<div *ngIf="imageURLs">
+    <a *ngFor="let imageURL of imageURLs" href = {{fullImage(imageURL)}} target="_blank">
+        <img src={{imageURL}} alt="Image is the Property of NASA" width="200" height="200">
+    </a>
+</div>
 

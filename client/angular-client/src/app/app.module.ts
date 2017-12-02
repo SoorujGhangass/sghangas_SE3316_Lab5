@@ -11,6 +11,7 @@ import { RegisterComponent } from './register/register.component';
 import { ImageSearchComponent } from './image-search/image-search.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { LogService } from './log.service';
+import { ImageSearchService } from './image-search.service';
 import { LogComponent } from './log/log.component';
 
 
