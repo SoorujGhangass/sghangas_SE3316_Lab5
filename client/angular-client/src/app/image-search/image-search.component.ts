@@ -8,8 +8,8 @@ import { ImageSearchService } from '../image-search.service';
 })
 
 export class ImageSearchComponent implements OnInit {
-  search:String="";
-  
+  searchTerm:String="";
+  imageURLs:String[]=[];
   constructor(private imageSearchService: ImageSearchService) {
   }
 
@@ -17,7 +17,8 @@ export class ImageSearchComponent implements OnInit {
   }
   
   getImages(): void{
-    
+    this.imageSearchService.getURLs(this.searchTerm)
+      .subscribe(imageURLs => this.imageURLs= imageURLs);
   }
 
 }

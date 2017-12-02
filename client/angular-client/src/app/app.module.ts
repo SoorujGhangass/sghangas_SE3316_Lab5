@@ -11,6 +11,7 @@ import { RegisterComponent } from './register/register.component';
 import { ImageSearchComponent } from './image-search/image-search.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { LogService } from './log.service';
+import { LogComponent } from './log/log.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { LogService } from './log.service';
     StartPageComponent,
     LoginComponent,
     RegisterComponent,
-    ImageSearchComponent
+    ImageSearchComponent,
+    LogComponent
   ],
   imports: [
     BrowserModule,
