@@ -1,0 +1,7 @@
+<h2>Search NASA's API for images:</h2>
+<br>
+<label>Search Term:
+    <input [(ngModel)]="search" placeholder="e.g. 'Apollo 11'"/>
+    <button (click)="imageSearchService.getImages()">Search</button>
+</label>
+

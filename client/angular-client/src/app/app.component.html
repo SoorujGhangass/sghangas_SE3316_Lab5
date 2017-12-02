@@ -3,18 +3,15 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
-  <img width="300" alt="Angular Logo" src="/assets/images/nasaLogo.png">
+  <img width="300" alt="NASA Logo" src="/assets/images/nasaLogo.png">
 </div>
-<h2> </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+
+<nav>
+  <a routerLink='/home'>Home</a>
+  <a routerLink='/login'>Log In</a>
+  <a routerLink='/register'>Register</a>
+  <a routerLink='/image-search'>Image Search</a>
+</nav>
+
+<router-outlet></router-outlet>
 

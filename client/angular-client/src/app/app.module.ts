@@ -2,18 +2,32 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 
+import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
+
 import { AppComponent } from './app.component';
+import { StartPageComponent } from './start-page/start-page.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { ImageSearchComponent } from './image-search/image-search.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { LogService } from './log.service';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    StartPageComponent,
+    LoginComponent,
+    RegisterComponent,
+    ImageSearchComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [ImageSearchService, LogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
