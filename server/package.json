@@ -17,8 +17,13 @@
   },
   "homepage": "https://github.com/SoorujGhangass/sghangas_SE3316_Lab5#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
     "express": "^4.16.2",
-    "mongoose": "^4.13.5"
+    "jsonwebtoken": "^8.1.0",
+    "mongoose": "^4.13.5",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.1"
   }
 }
