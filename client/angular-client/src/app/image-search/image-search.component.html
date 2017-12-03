@@ -5,8 +5,8 @@
     <button (click)="searchImages()">Search</button>
 </label>
 <br><br>
-<div *ngIf="prevLink"><a href={{prevLink}}>Previous</a></div>
-<div *ngIf="nextLink"><a href={{nextLink}}>Next</a></div>
+<div *ngIf="prevLink"><a href="javascript:void(0);" (click)="getImages(prevLink)">Previous</a></div>
+<div *ngIf="nextLink"><a href="javascript:void(0);" (click)="getImages(nextLink)">Next</a></div>
 <br><br>
 <div *ngIf="imageURLs">
     <a *ngFor="let imageURL of imageURLs" href = {{fullImage(imageURL)}} target="_blank">

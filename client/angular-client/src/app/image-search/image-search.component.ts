@@ -15,13 +15,16 @@ export class ImageSearchComponent implements OnInit {
   searchTerm:string="";
   nasaSearchURL:string="";
   imageURLs:string[]=[];
-  Links:Link[]=[];
+  Links:Object[]=[];
   prevLink:string;
   nextLink:string;
   constructor(private imageSearchService: ImageSearchService) {
   }
 
   ngOnInit() {
+    this.imageURLs=[];
+    this.nextLink="";
+    this.prevLink="";
   }
   
   getImages(searchURL:string): void{
@@ -32,23 +35,26 @@ export class ImageSearchComponent implements OnInit {
       
     this.imageSearchService.getLinks(searchURL)
       .subscribe(links =>{
-        console.log(this.Links);
-        this.Links = links;
-        console.log(this.Links[0]);
-        console.log(this.Links.length);
-        for (var i=0;i<this.Links.length;i++){
-          console.log(i);
-          if(this.Links[i].type=='next'){
-            console.log("next");
-            this.nextLink = this.Links[i].href;
-          }
-          else{
-            this.prevLink = this.Links[i].href
-            console.log("prev");
-          }
-        }
+        this.processJSON(links);
       });
 
+  }
+  
+  processJSON(data: Object){
+    this.nextLink ="";
+    this.prevLink="";
+    this.Links = data.collection.links;
+    console.log(this.Links);
+    if(this.Links){
+      for (var i=0;i<this.Links.length;i++){
+        if(this.Links[i].rel=='next'){
+          this.nextLink = this.Links[i].href;
+        }
+        else{
+          this.prevLink = this.Links[i].href
+        }
+      }
+    }
   }
   
   searchImages(){

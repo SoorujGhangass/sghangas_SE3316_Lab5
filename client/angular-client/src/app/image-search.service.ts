@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Response } from '@angular/http';
 import { LogService } from './log.service';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import 'rxjs/add/operator/do'
+import 'rxjs/add/operator/map'
 import {Link} from './links'
 
 
@@ -31,16 +32,23 @@ export class ImageSearchService {
     return of (this.URL_List);
   }
   
-  getLinks(nasaSearchURL: string): Observable<Link[]>{
+  // getLinks(nasaSearchURL: string): Observable<Link[]>{
     
-    this.Links = [];
-    this.http.get(nasaSearchURL).subscribe(data =>{
-      this.extractLinks(data);
-      this.log('Fetched '+this.Links.length+ ' Links');
-      this.log(JSON.stringify(this.Links));
-    });
+  //   this.Links = [];
+  //   this.http.get(nasaSearchURL)
+  //     .map((response:Response)=><Link[]>response.json())
+  //     .subscribe(data =>{
+  //       this.extractLinks(data);
+  //       this.log('Fetched '+this.Links.length+ ' Links');
+  //       this.log(JSON.stringify(this.Links));
+  //   });
     
-    return of (this.Links);
+  //   return of (this.Links);
+  // }
+  
+  getLinks(nasaSearchURL: string){
+    return this.http.get(nasaSearchURL);
+      .map((response)=>response);
   }
 
   
