@@ -12,7 +12,6 @@ var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 
 
-
 //Setting up Database
 var mongoose   = require('mongoose');
 var config = require ('./config/database');
@@ -28,6 +27,11 @@ mongoose.connection.on('connected', ()=>{
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+//For authentication via JWT
+app.use(passport.initialize());
+app.use(passport.session());
+
+//Allows cross origin resource sharing/requests. Needed to use CRUD options from front-end I believe
 app.use(cors());
 
 app.use(express.static(path.join(__dirname,'../client/angular-client')));

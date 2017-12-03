@@ -3,9 +3,13 @@ var express = require('express');
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
+var passport = require("passport");
+var jwt = require("jsonwebtoken");
 
 //Importing Collection Data Schema
 var Collection= require('../app/models/collection'); //Using the CollectionSchema in /app/models/collection.js
+var User = require("../app/models/user");
+
 
 // middleware to use for all requests
 router.use(function(req, res, next) {
@@ -89,5 +93,35 @@ router.route('/collection/:collection_id')
         });
     });
 // more routes for our API will happen here
+
+router.route('/user')
+
+    // create a collection (accessed at POST http://localhost:8081/api/collection)
+    .post(function(req, res) {
+
+        var newUser = new User({
+            name: req.body.name,
+            email: req.body.email,
+            hashedPassword: req.body.hashedPassword,
+            emailVerified: req.body.emailVerified
+        });      // create a new instance of the Collection model
+        
+        User.addUser(newUser,(err,user)=>{
+           if(err){
+               res.json({success:false,msg:"Failed to register user"});
+           } else{
+               res.json({success:true,msg:"User registered"});
+           }
+        });
+    })
+    
+    .get(function(req, res) {
+        Collection.find(function(err, collection) {
+            if (err)
+                res.send(err);
+
+            res.json(collection);
+        });
+    });
 
 module.exports = router;
