@@ -40,6 +40,14 @@ export class AuthService {
     this.user = user;
   }
   
+  //Token is related to email verification. Not authorization.
+  confirmEmail(token){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('/api/user/confirmation', token,{headers: headers})
+      .map(res => res.json());
+  }
+  
   loadToken(){
     var token = localStorage.getItem('id_token');
     this.authToken = token;

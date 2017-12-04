@@ -113,8 +113,11 @@ router.route('/user')
            if(err){
                res.json({success:false,msg:"Failed to register user"});
            } else{
-               Token.newToken(user,(err,user)=>{
-                   if(err)throw err;
+               Token.sendToken(user,(err,user)=>{
+                    if(err){
+                        console.log(err);
+                        res.json({success:false,msg:"Failed to send email"});
+                    }
                     res.json({success:true,msg:"User registered. Click on the link sent to your email."});  
                });
            }
@@ -135,23 +138,29 @@ router.route('/user/confirmation')
     // create a collection (accessed at POST http://localhost:8081/api/collection)
     .post(function(req, res) {
 
-        var newUser = new User({
-            name: req.body.name,
-            email: req.body.email,
-            hashedPassword: req.body.hashedPassword,
-            emailVerified: req.body.emailVerified
-        });      // create a new instance of the Collection model
-        
-        User.addUser(newUser,(err,user)=>{
-           if(err){
-               res.json({success:false,msg:"Failed to register user"});
-           } else{
-               Token.newToken(user,(err,user)=>{
-                   if(err)throw err;
-                    res.json({success:true,msg:"User registered. Click on the link sent to your email."});  
-               });
-           }
+        // Check for validation errors    
+        // var errors = req.validationErrors();
+        // if (errors) return res.status(400).send(errors);
+     
+        // Find a matching token
+        console.log(req.body.token);
+        Token.findOne({ token: req.body.token }, function (err, token) {
+            if (!token) return res.json({success:false, msg: 'We were unable to find a valid token. Your token my have expired.' });
+     
+            // If we found a token, find a matching user
+            User.findOne({ _id: token._userId }, function (err, user) {
+                if (!user) return res.json({success:false, msg:'We were unable to find a user for this token.' });
+                if (user.emailVerified) return res.json({success:false, msg: 'This user has already been verified.' });
+                console.log(user);
+                // Verify and save the user
+                user.emailVerified = true;
+                user.save(function (err) {
+                    if (err) { return res.json({success:false, msg: err.message }); }
+                    return res.json({success:true, msg: 'Your email have been verified!' });
+                });
+            });
         });
+        
     })
 
 router.route('/user/resend')
@@ -229,3 +238,5 @@ router.route('/user/profile')
     });
     
 module.exports = router;
+
+

@@ -20,6 +20,7 @@ import { AuthService } from './services/auth.service';
 import { MyCollectionsComponent } from './components/my-collections/my-collections.component';
 
 import {AuthGuard} from './guards/auth.guard';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {AuthGuard} from './guards/auth.guard';
     ImageSearchComponent,
     LogComponent,
     NavbarComponent,
-    MyCollectionsComponent
+    MyCollectionsComponent,
+    ConfirmationComponent
   ],
   imports: [
     BrowserModule,
