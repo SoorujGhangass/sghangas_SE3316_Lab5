@@ -168,22 +168,30 @@ router.route('/user/resend')
     // create a collection (accessed at POST http://localhost:8081/api/collection)
     .post(function(req, res) {
 
-        var newUser = new User({
-            name: req.body.name,
-            email: req.body.email,
-            hashedPassword: req.body.hashedPassword,
-            emailVerified: req.body.emailVerified
-        });      // create a new instance of the Collection model
+        var email = req.body.email;
+        var password = req.body.hashedPassword;
         
-        User.addUser(newUser,(err,user)=>{
-           if(err){
-               res.json({success:false,msg:"Failed to register user"});
-           } else{
-               Token.newToken(user,(err,user)=>{
-                   if(err)throw err;
-                    res.json({success:true,msg:"User registered. Click on the link sent to your email."});  
+        User.getUserByEmail(email, (err,user)=>{
+            if(err)throw err;
+            if(!user){
+                return res.json({success:false,msg:'User not found'});
+            }
+            
+            User.comparePassword(password,user.hashedPassword,(err,isMatch)=>{
+                if(err)throw err;
+            
+                if(isMatch){
+                    Token.sendToken(user,(err,user)=>{
+                    if(err){
+                        console.log(err);
+                        res.json({success:false,msg:"Failed to send email"});
+                    }
+                    res.json({success:true,msg:"Email sent. Click on the link sent to your email."});  
                });
-           }
+                }else{
+                    return res.json({success:false,msg:'Wrong password'});
+                }
+            });
         });
     })    
     

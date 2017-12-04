@@ -46,5 +46,26 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+  
+  resend(){
+    const user = {
+      email: this.email,
+      hashedPassword: this.password
+    }
+
+    this.authService.resendEmail(user).subscribe(data => {
+      if(data.success){
+        this.flashMessage.show('Email has been sent', {
+          cssClass: 'alert-success',
+          timeout: 5000});
+        // this.router.navigate(['/my-collections']);
+      } else {
+        this.flashMessage.show(data.msg, {
+          cssClass: 'alert-danger',
+          timeout: 5000});
+        // this.router.navigate(['/login']);
+      }
+    });
+  }
 
 }

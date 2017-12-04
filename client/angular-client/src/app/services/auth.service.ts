@@ -48,6 +48,13 @@ export class AuthService {
       .map(res => res.json());
   }
   
+  resendEmail(user){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('/api/user/resend', user,{headers: headers})
+      .map(res => res.json());
+  }
+  
   loadToken(){
     var token = localStorage.getItem('id_token');
     this.authToken = token;
