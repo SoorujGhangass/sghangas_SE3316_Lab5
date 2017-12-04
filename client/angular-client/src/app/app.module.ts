@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
-
+import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { FlashMessagesModule } from 'angular2-flash-messages';
 
@@ -16,6 +16,7 @@ import { ImageSearchService } from './services/image-search.service';
 import { LogComponent } from './components/log/log.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ValidateService } from './services/validate.service';
+import { AuthService } from './services/auth.service';
 
 
 @NgModule({
@@ -33,9 +34,10 @@ import { ValidateService } from './services/validate.service';
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    FlashMessagesModule.forRoot()
+    FlashMessagesModule.forRoot(),
+    HttpModule
   ],
-  providers: [ImageSearchService, LogService, ValidateService],
+  providers: [ImageSearchService, LogService, ValidateService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
