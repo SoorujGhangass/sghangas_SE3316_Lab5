@@ -17,6 +17,7 @@ import { LogComponent } from './components/log/log.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
+import { MyCollectionsComponent } from './components/my-collections/my-collections.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { AuthService } from './services/auth.service';
     RegisterComponent,
     ImageSearchComponent,
     LogComponent,
-    NavbarComponent
+    NavbarComponent,
+    MyCollectionsComponent
   ],
   imports: [
     BrowserModule,

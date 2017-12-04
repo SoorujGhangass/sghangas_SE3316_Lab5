@@ -6,13 +6,15 @@ import {StartPageComponent} from './components/start-page/start-page.component';
 import {RegisterComponent} from './components/register/register.component';
 import {LoginComponent} from './components/login/login.component';
 import {ImageSearchComponent} from './components/image-search/image-search.component';
+import {MyCollectionsComponent} from './components/my-collections/my-collections.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   {path:'home', component:StartPageComponent},
   {path:'register', component:RegisterComponent},
   {path:'login',component:LoginComponent},
-  {path:'image-search',component:ImageSearchComponent}];
+  {path:'image-search',component:ImageSearchComponent},
+  {path:'my-collections',component:MyCollectionsComponent}];
 
 @NgModule({
   imports: [
