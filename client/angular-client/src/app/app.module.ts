@@ -19,6 +19,8 @@ import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
 import { MyCollectionsComponent } from './components/my-collections/my-collections.component';
 
+import {AuthGuard} from './guards/auth.guard';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +41,7 @@ import { MyCollectionsComponent } from './components/my-collections/my-collectio
     FlashMessagesModule.forRoot(),
     HttpModule
   ],
-  providers: [ImageSearchService, LogService, ValidateService, AuthService],
+  providers: [ImageSearchService, LogService, ValidateService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

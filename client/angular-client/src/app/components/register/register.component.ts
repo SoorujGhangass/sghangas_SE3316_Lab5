@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
         this.flashMessage.show('You are now registered. Please verify your email address by clicking the link that was sent to you.', {cssClass: 'alert-success', timeout: 8000});
         this.router.navigate(['/login']);
       } else {
-        this.flashMessage.show('Something went wrong', {cssClass: 'alert-danger', timeout: 3000});
+        this.flashMessage.show('Something went wrong. You are probably trying an email that is already taken.', {cssClass: 'alert-danger', timeout: 3000});
         this.router.navigate(['/register']);
       }
     });

@@ -8,13 +8,15 @@ import {LoginComponent} from './components/login/login.component';
 import {ImageSearchComponent} from './components/image-search/image-search.component';
 import {MyCollectionsComponent} from './components/my-collections/my-collections.component';
 
+import {AuthGuard} from './guards/auth.guard';
+
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   {path:'home', component:StartPageComponent},
   {path:'register', component:RegisterComponent},
   {path:'login',component:LoginComponent},
   {path:'image-search',component:ImageSearchComponent},
-  {path:'my-collections',component:MyCollectionsComponent}];
+  {path:'my-collections',component:MyCollectionsComponent, canActivate: [AuthGuard]}]
 
 @NgModule({
   imports: [

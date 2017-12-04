@@ -11,6 +11,7 @@ var config = require('../config/database')
 //Importing Collection Data Schema
 var Collection= require('../app/models/collection'); //Using the CollectionSchema in /app/models/collection.js
 var User = require("../app/models/user");
+var Token = require('../app/models/token')
 
 
 // middleware to use for all requests
@@ -112,7 +113,10 @@ router.route('/user')
            if(err){
                res.json({success:false,msg:"Failed to register user"});
            } else{
-               res.json({success:true,msg:"User registered"});
+               Token.newToken(user,(err,user)=>{
+                   if(err)throw err;
+                    res.json({success:true,msg:"User registered. Click on the link sent to your email."});  
+               });
            }
         });
     })
@@ -125,6 +129,55 @@ router.route('/user')
             res.json(collection);
         });
     });
+    
+router.route('/user/confirmation')
+
+    // create a collection (accessed at POST http://localhost:8081/api/collection)
+    .post(function(req, res) {
+
+        var newUser = new User({
+            name: req.body.name,
+            email: req.body.email,
+            hashedPassword: req.body.hashedPassword,
+            emailVerified: req.body.emailVerified
+        });      // create a new instance of the Collection model
+        
+        User.addUser(newUser,(err,user)=>{
+           if(err){
+               res.json({success:false,msg:"Failed to register user"});
+           } else{
+               Token.newToken(user,(err,user)=>{
+                   if(err)throw err;
+                    res.json({success:true,msg:"User registered. Click on the link sent to your email."});  
+               });
+           }
+        });
+    })
+
+router.route('/user/resend')
+
+    // create a collection (accessed at POST http://localhost:8081/api/collection)
+    .post(function(req, res) {
+
+        var newUser = new User({
+            name: req.body.name,
+            email: req.body.email,
+            hashedPassword: req.body.hashedPassword,
+            emailVerified: req.body.emailVerified
+        });      // create a new instance of the Collection model
+        
+        User.addUser(newUser,(err,user)=>{
+           if(err){
+               res.json({success:false,msg:"Failed to register user"});
+           } else{
+               Token.newToken(user,(err,user)=>{
+                   if(err)throw err;
+                    res.json({success:true,msg:"User registered. Click on the link sent to your email."});  
+               });
+           }
+        });
+    })    
+    
     
 router.route('/user/authenticate')
 
@@ -142,20 +195,25 @@ router.route('/user/authenticate')
             
             User.comparePassword(password,user.hashedPassword,(err,isMatch)=>{
                 if(err)throw err;
+            
                 if(isMatch){
-                    var token = jwt.sign({data:user},config.secret,{
-                        expiresIn: 3600 //1 hour
-                    });
-                    
-                    res.json({
-                        success:true,
-                        token:'JWT '+token,
-                        user:{
-                            id:user._id,
-                            name:user.name,
-                            email:user.email
-                        }
-                    });
+                    if(!user.emailVerified){
+                        return res.json({success:false,msg:'Email is not verified.'})
+                    }else{
+                        var token = jwt.sign({data:user},config.secret,{
+                            expiresIn: 3600 //1 hour
+                        });
+                        
+                        return res.json({
+                            success:true,
+                            token:'JWT '+token,
+                            user:{
+                                id:user._id,
+                                name:user.name,
+                                email:user.email
+                            }
+                        });
+                    }
                 }else{
                     return res.json({success:false,msg:'Wrong password'});
                 }

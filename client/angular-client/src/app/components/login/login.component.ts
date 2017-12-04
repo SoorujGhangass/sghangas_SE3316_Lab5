@@ -36,6 +36,9 @@ export class LoginComponent implements OnInit {
           timeout: 5000});
         this.router.navigate(['/my-collections']);
       } else {
+        if(data.msg == 'Email is not verified.'){
+          //RESEND EMAIL???
+        }
         this.flashMessage.show(data.msg, {
           cssClass: 'alert-danger',
           timeout: 5000});
