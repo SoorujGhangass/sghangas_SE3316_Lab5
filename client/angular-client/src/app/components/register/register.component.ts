@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
     const user = {
       name: this.name,
       email: this.email,
-      hashedPassword: this.password
+      hashedPassword: this.hashedPassword
     }
     // Required Fields
     if(user.email == undefined || user.email == ""){
