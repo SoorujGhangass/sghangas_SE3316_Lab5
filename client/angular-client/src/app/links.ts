@@ -1,4 +1,4 @@
-export class Link {
-  type: string;
-  href: string;
+export class Link{
+    href:string;
+    type:string;
 }

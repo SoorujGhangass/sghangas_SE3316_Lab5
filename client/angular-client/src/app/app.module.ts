@@ -3,16 +3,19 @@ import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 import { AppComponent } from './app.component';
-import { StartPageComponent } from './start-page/start-page.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { ImageSearchComponent } from './image-search/image-search.component';
-import { AppRoutingModule } from './/app-routing.module';
-import { LogService } from './log.service';
-import { ImageSearchService } from './image-search.service';
-import { LogComponent } from './log/log.component';
+import { StartPageComponent } from './components/start-page/start-page.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ImageSearchComponent } from './components/image-search/image-search.component';
+import { AppRoutingModule } from './app-routing.module'; //Why was there a '//'
+import { LogService } from './services/log.service';
+import { ImageSearchService } from './services/image-search.service';
+import { LogComponent } from './components/log/log.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ValidateService } from './services/validate.service';
 
 
 @NgModule({
@@ -22,15 +25,17 @@ import { LogComponent } from './log/log.component';
     LoginComponent,
     RegisterComponent,
     ImageSearchComponent,
-    LogComponent
+    LogComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    FlashMessagesModule.forRoot()
   ],
-  providers: [ImageSearchService, LogService],
+  providers: [ImageSearchService, LogService, ValidateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

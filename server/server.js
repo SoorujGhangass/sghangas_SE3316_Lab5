@@ -31,10 +31,11 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
+require('./config/passport')(passport);
 //Allows cross origin resource sharing/requests. Needed to use CRUD options from front-end I believe
 app.use(cors());
 
-app.use(express.static(path.join(__dirname,'../client/angular-client')));
+app.use(express.static(path.join(__dirname,'public')));
 
 //var port = process.env.PORT || 8080;        // set our port
 var port = 8081;

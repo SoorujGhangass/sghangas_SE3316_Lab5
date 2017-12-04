@@ -1,3 +1,5 @@
+//Source: https://www.youtube.com/watch?v=6pdFXmTfkeE&t=4s
+
 var express = require('express');
 
 // ROUTES FOR OUR API
@@ -5,7 +7,7 @@ var express = require('express');
 var router = express.Router();              // get an instance of the express Router
 var passport = require("passport");
 var jwt = require("jsonwebtoken");
-
+var config = require('../config/database')
 //Importing Collection Data Schema
 var Collection= require('../app/models/collection'); //Using the CollectionSchema in /app/models/collection.js
 var User = require("../app/models/user");
@@ -123,5 +125,49 @@ router.route('/user')
             res.json(collection);
         });
     });
+    
+router.route('/user/authenticate')
 
+    // create a collection (accessed at POST http://localhost:8081/api/collection)
+    .post(function(req, res) {
+        
+        var email = req.body.email;
+        var password = req.body.hashedPassword;
+        
+        User.getUserByEmail(email, (err,user)=>{
+            if(err)throw err;
+            if(!user){
+                return res.json({success:false,msg:'User not found'});
+            }
+            
+            User.comparePassword(password,user.hashedPassword,(err,isMatch)=>{
+                if(err)throw err;
+                if(isMatch){
+                    var token = jwt.sign({data:user},config.secret,{
+                        expiresIn: 3600 //1 hour
+                    });
+                    
+                    res.json({
+                        success:true,
+                        token:'JWT '+token,
+                        user:{
+                            id:user._id,
+                            name:user.name,
+                            email:user.email
+                        }
+                    });
+                }else{
+                    return res.json({success:false,msg:'Wrong password'});
+                }
+            });
+        });
+
+    });
+
+router.route('/user/profile')
+
+    .get(passport.authenticate('jwt',{session:false}),function(req,res){
+        res.json({user:req.user});
+    });
+    
 module.exports = router;

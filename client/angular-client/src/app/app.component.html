@@ -1,18 +1,11 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="NASA Logo" src="/assets/images/nasaLogo.png">
+
+<app-navbar></app-navbar>
+
+<div class = "container">
+  <app-log></app-log>
+
+  <flash-messages></flash-messages>
+  <router-outlet></router-outlet>
 </div>
 
-<nav>
-  <a routerLink='/home'>Home</a>
-  <a routerLink='/login'>Log In</a>
-  <a routerLink='/register'>Register</a>
-  <a routerLink='/image-search'>Image Search</a>
-</nav>
-
-<router-outlet></router-outlet>
-<app-log></app-log>
 

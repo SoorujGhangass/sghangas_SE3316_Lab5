@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ImageSearchService } from '../image-search.service';
-import {Link} from '../links'
+import { ImageSearchService } from '../../services/image-search.service';
+import {Link} from '../../links'
 
 const IMAGE_QUERY_CONSTRAINT: string = "&media_type=image";
 const nasaAPI = 'https://images-api.nasa.gov';
@@ -15,7 +15,7 @@ export class ImageSearchComponent implements OnInit {
   searchTerm:string="";
   nasaSearchURL:string="";
   imageURLs:string[]=[];
-  Links:Object[]=[];
+  Links:any[]=[];
   prevLink:string;
   nextLink:string;
   constructor(private imageSearchService: ImageSearchService) {
@@ -40,7 +40,7 @@ export class ImageSearchComponent implements OnInit {
 
   }
   
-  processJSON(data: Object){
+  processJSON(data: any){
     this.nextLink ="";
     this.prevLink="";
     this.Links = data.collection.links;

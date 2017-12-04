@@ -5,7 +5,7 @@ import { LogService } from './log.service';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/map'
-import {Link} from './links'
+import {Link} from '../links'
 
 
 @Injectable()
@@ -47,7 +47,7 @@ export class ImageSearchService {
   // }
   
   getLinks(nasaSearchURL: string){
-    return this.http.get(nasaSearchURL);
+    return this.http.get(nasaSearchURL)
       .map((response)=>response);
   }
 

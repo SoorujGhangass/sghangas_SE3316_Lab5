@@ -1,0 +1,28 @@
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <img width="55" alt="NASA Logo" src="/assets/images/nasaLogo.png">
+  <a class="navbar-brand" href="javascript:void(0);">Sooruj's SE 3316 Lab 5 NASA Image App</a>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+        <a class="nav-link" routerLink='/home'>Home</a>
+      </li>
+      <li [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+        <a class="nav-link" routerLink='/image-search'>Image Search</a>
+      </li>
+    </ul>
+    
+    <ul class="navbar-nav navbar-right">
+      <li [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+        <a class="nav-link" routerLink='/login'>Login</a>
+      </li>
+      <li [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+        <a class="nav-link" routerLink='/register'>Register</a>
+      </li>
+    </ul>
+    
+  </div>
+</nav>
