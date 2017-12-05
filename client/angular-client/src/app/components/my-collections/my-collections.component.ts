@@ -11,6 +11,7 @@ import {FlashMessagesService} from 'angular2-flash-messages';
 export class MyCollectionsComponent implements OnInit {
   myCollections:Object[];
   user:any;
+  editCollection:Object;
   
   
   constructor(private authService:AuthService, private router:Router, private flashMessage:FlashMessagesService) {
@@ -20,6 +21,7 @@ export class MyCollectionsComponent implements OnInit {
   ngOnInit() {
     this.authService.getMyCollections(this.user.id).subscribe(myCollections => {
       this.myCollections = myCollections;
+      console.log(myCollections);
     },
     err => {
       console.log(err);
@@ -46,6 +48,14 @@ export class MyCollectionsComponent implements OnInit {
         });
      } else {
      }
-}
+  }
+  
+  setEdit(collection){
+    this.editCollection = collection;
+  }
+  
+  clear(){
+    this.editCollection= null;
+  }
   
 }

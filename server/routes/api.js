@@ -76,7 +76,6 @@ router.route('/collection/:collection_id')
 
     
     .put(function(req, res) {
-
         // use our collection model to find the collection we want
         Collection.findById(req.params.collection_id, function(err, collection) {
 
