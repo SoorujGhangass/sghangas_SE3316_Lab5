@@ -24,12 +24,13 @@ export class AuthService {
       .map(res => res.json());
   }
   
-  getMyCollections(){
+  getMyCollections(userID){
     let headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    return this.http.get('/api/user/my-collections',{headers: headers})
+    headers.append('UserID',userID);
+    return this.http.get('/api/collection',{headers: headers})
       .map(res => res.json());
   }
 
@@ -57,9 +58,16 @@ export class AuthService {
   
   createCollection(collection){
     let headers = new Headers();
-    console.log('test');
     headers.append('Content-Type','application/json');
     return this.http.post('/api/collection', collection,{headers: headers})
+      .map(res => res.json());
+  }
+  
+  deleteCollection(collectionID){
+    let headers = new Headers();
+    console.log('delete');
+    headers.append('Content-Type','application/json');
+    return this.http.delete('/api/collection/'+collectionID,{headers: headers})
       .map(res => res.json());
   }
   

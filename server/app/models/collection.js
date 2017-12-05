@@ -53,5 +53,6 @@ module.exports.getTopCollections = function(number, callback){
 
 
 module.exports.getCollectionsByUser = function(userID, callback){
-    
+    var query = {ownerID:userID};
+    Collection.find(query).exec(callback);
 }

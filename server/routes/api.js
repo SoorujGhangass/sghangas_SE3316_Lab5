@@ -50,14 +50,17 @@ router.route('/collection')
         });
         
     })
-    
-    .get(function(req, res) {
-        Collection.find(function(err, collection) {
-            if (err)
-                res.send(err);
+    // .get(passport.authenticate('jwt',{session:false}),function(req,res){
+    .get(function(req,res){
+        var userID = req.get('UserID');
+        Collection.getCollectionsByUser(userID,(err,collections)=>{
+            if(err){
+                console.log(err);
+                throw err;
+            }
+            return res.json(collections);
+        })
 
-            res.json(collection);
-        });
     });
 
 router.route('/collection/:collection_id')
@@ -67,9 +70,10 @@ router.route('/collection/:collection_id')
         Collection.findById(req.params.collection_id, function(err, collection) {
             if (err)
                 res.send(err);
-            res.json(collection);
+            res.send(collection);
         });
     })
+
     
     .put(function(req, res) {
 
@@ -93,13 +97,14 @@ router.route('/collection/:collection_id')
     })
     
     .delete(function(req, res) {
+        console.log(req.params.collection_id);
         Collection.remove({
             _id: req.params.collection_id
         }, function(err, collection) {
             if (err)
-                res.send(err);
+                return res.json({success: true, message: 'Could not delete'});
 
-            res.json({ message: 'Successfully deleted' });
+            return res.json({ success: true, message: 'Successfully deleted' });
         });
     });
 // more routes for our API will happen here

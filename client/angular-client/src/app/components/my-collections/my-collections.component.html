@@ -1,7 +1,15 @@
 <div *ngIf="myCollections">
-  <h2 class="page-header">{{user.name}}</h2>
-  <ul class="list-group">
-    <li class="list-group-item">Username: {{user.username}}</li>
-    <li class="list-group-item">Email: {{user.email}}</li>
-  </ul>
+  <h2 class="page-header">{{user.name}}</h2><br>
+    <div *ngFor="let myCollection of myCollections">
+      <a routerLink='/view-collection'>
+        View {{myCollection.name}}
+      </a>
+      <a routerLink='/edit-collection'>
+        Edit {{myCollection.name}}
+      </a>
+      <a (click)="delete(myCollection)">
+        Delete {{myCollection.name}}
+      </a>
+    </div>
 </div>
+
