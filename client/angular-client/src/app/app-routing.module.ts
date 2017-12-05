@@ -22,8 +22,8 @@ const routes: Routes = [
   {path:'image-search',component:ImageSearchComponent},
   {path:'my-collections',component:MyCollectionsComponent, canActivate: [AuthGuard]},
   {path:'confirmation',component:ConfirmationComponent},
-  {path:'create-collection',component:CreateCollectionComponent},
-  {path:'edit-collection',component:EditCollectionComponent},
+  {path:'create-collection',component:CreateCollectionComponent,canActivate: [AuthGuard]},
+  {path:'edit-collection',component:EditCollectionComponent, canActivate: [AuthGuard]},
   {path:'view-collection',component:ViewCollectionComponent}
   ]
 
