@@ -55,6 +55,14 @@ export class AuthService {
       .map(res => res.json());
   }
   
+  createCollection(collection){
+    let headers = new Headers();
+    console.log('test');
+    headers.append('Content-Type','application/json');
+    return this.http.post('/api/collection', collection,{headers: headers})
+      .map(res => res.json());
+  }
+  
   loadToken(){
     var token = localStorage.getItem('id_token');
     this.authToken = token;
@@ -69,4 +77,6 @@ export class AuthService {
     this.user = null;
     localStorage.clear();
   }
+  
+
 }

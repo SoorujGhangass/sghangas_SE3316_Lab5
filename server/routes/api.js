@@ -30,18 +30,25 @@ router.route('/collection')
 
     // create a collection (accessed at POST http://localhost:8081/api/collection)
     .post(function(req, res) {
+        
+        console.log("test");
 
-        var collection = new Collection();      // create a new instance of the Collection model
-        collection.name = req.body.name;  // set the collections name (comes from the request)
+        var collection = new Collection({
+            name: req.body.name,
+            description: req.body.description,
+            isPrivate: req.body.isPrivate,
+            ownerID: req.body.ownerID
+        }); 
+    
 
         // save the collection and check for errors
         collection.save(function(err) {
             if (err)
-                res.send(err);
+                return res.json({success:false,msg:"Failed to save collection"});
+            return res.json({success:true,msg:"Collection created"});
 
         });
         
-        res.json({ message: 'Collection created!' });
     })
     
     .get(function(req, res) {

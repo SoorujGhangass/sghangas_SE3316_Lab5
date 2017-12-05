@@ -1,0 +1,18 @@
+
+<h2 class="page-header">Edit Collection</h2>
+<form (submit)="edit()">
+  <div class="form-group">
+    <label>Collection Name</label>
+    <input type="text" class="form-control" [(ngModel)]="collectionName" name="collectionName">
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <input type="text" class="form-control" [(ngModel)]="description" name="description">
+  </div>
+  <label class="switch">Public?
+      <input type="checkbox" [(ngModel)]="public" name ="public">
+      <span class="slider round"></span>
+  </label>
+  <br>
+  <input type="submit" class="btn btn-primary" value="Save Changes">
+</form>

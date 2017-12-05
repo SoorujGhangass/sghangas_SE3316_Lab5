@@ -15,13 +15,13 @@ export class MyCollectionsComponent implements OnInit {
   constructor(private authService:AuthService, private router:Router) { }
 
   ngOnInit() {
-    this.authService.getMyCollections().subscribe(profile => {
-      this.user = profile.user;
-    },
-    err => {
-      console.log(err);
-      return false;
-    });
+    // this.authService.getMyCollections().subscribe(profile => {
+    //   this.user = profile.user;
+    // },
+    // err => {
+    //   console.log(err);
+    //   return false;
+    // });
   }
   
 }

@@ -21,6 +21,9 @@ import { MyCollectionsComponent } from './components/my-collections/my-collectio
 
 import {AuthGuard} from './guards/auth.guard';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+import { CreateCollectionComponent } from './components/create-collection/create-collection.component';
+import { EditCollectionComponent } from './components/edit-collection/edit-collection.component';
+import { ViewCollectionComponent } from './components/view-collection/view-collection.component';
 
 
 @NgModule({
@@ -33,7 +36,10 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
     LogComponent,
     NavbarComponent,
     MyCollectionsComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    CreateCollectionComponent,
+    EditCollectionComponent,
+    ViewCollectionComponent
   ],
   imports: [
     BrowserModule,

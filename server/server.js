@@ -34,7 +34,7 @@ app.use(passport.session());
 require('./config/passport')(passport);
 //Allows cross origin resource sharing/requests. Needed to use CRUD options from front-end I believe
 app.use(cors());
-
+//Not using this until the app is built
 app.use(express.static(path.join(__dirname,'public')));
 
 //var port = process.env.PORT || 8080;        // set our port
